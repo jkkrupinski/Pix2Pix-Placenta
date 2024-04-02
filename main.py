@@ -62,8 +62,8 @@ def load(image_file):
   real_size = 470
 
   # Crop
-  input_image = tf.image.crop_to_bounding_box(input_image,int((input_size-256)/2),int((input_size-256)/2), 256,256)
-  real_image = tf.image.crop_to_bounding_box(real_image,int((real_size-256)/2),int((real_size-256)/2), 256,256)
+  input_image = tf.image.crop_to_bounding_box(input_image,int((input_size-256)/2),int((input_size-IMG_WIDTH)/2), IMG_WIDTH,IMG_WIDTH)
+  real_image = tf.image.crop_to_bounding_box(real_image,int((real_size-256)/2),int((real_size-IMG_WIDTH)/2), IMG_WIDTH,IMG_WIDTH)
 
   # Convert image to float32 tensor
   input_image = tf.cast(input_image, tf.float32)
@@ -86,7 +86,7 @@ def load_single(image_file):
 
 
   # Crop
-  input_image = tf.image.crop_to_bounding_box(input_image,50,0, 256,256)
+  input_image = tf.image.crop_to_bounding_box(input_image,50,0, IMG_WIDTH,IMG_WIDTH)
 
   # Convert image to float32 tensor
   input_image = tf.cast(input_image, tf.float32)
@@ -163,12 +163,13 @@ def test_big_picture():
 
   images = []
 
-  X = input_image.shape[0] / 256
-  Y = input_image.shape[1] / 256
+  fit_in_width = input_image.shape[0] / IMG_WIDTH
+  fit_in_height = input_image.shape[1] / IMG_WIDTH
 
 
-  for i in range(int(X)):
-    for j in range(int(Y)):
+  for i in range(int(fit_in_width)):
+    for j in range(int(fit_in_height)):
+      
       cropped_image = tf.image.crop_to_bounding_box(input_image,i*IMG_HEIGHT,j*IMG_WIDTH, IMG_HEIGHT,IMG_WIDTH)
       cropped_image = cropped_image * 40
       cropped_image = tf.cast(cropped_image, tf.float32)
