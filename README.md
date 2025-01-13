@@ -20,9 +20,3 @@ Original data comes form [here](https://paperswithcode.com/dataset/fetreg)
 Images from dataset are rgb images with black `(0,0,0)` background and segmented vessels `(1,1,1)` to better distinguish vessels form background image pixels are multipiled by 40. 
 
 `generator()` model gets as input images of size 256x256 that are cast to `tf.float32` data type, than images are normalized and `None` batch dimension is added to fit to expected model input.
-
-## ToDo
-- format and refactor code + repo
-- train on inproved dataset without lasers
-- update kaggle
-- finish README
